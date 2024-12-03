@@ -28,6 +28,11 @@ chmod a+x run.sh
 ```
 python tests/performance_check.py -c 100 -b 5
 ```
+or
+
+```
+docker compose run -it test-runner python performance_check.py -c 100 -b 5
+```
 
 -c - count of order
 
