@@ -9,6 +9,10 @@ from .utils.defaults import BASE_URL, WS_URL
 async def test_websocket_order_notifications():
     """
     Test WebSocket order notifications.
+    Steps:
+    1 - Make connection to websocket
+    2 - Send request to create order
+    3 - Check that message from server received
     """
     async with ws_connect(WS_URL) as websocket:
         # Create a new order

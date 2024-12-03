@@ -10,8 +10,12 @@ class TestPostOrders:
 
     def test_create_order(self):
         """
-        Create order
-        :return:
+        Check create order:
+        Steps:
+        1 - Create order
+        2 - Check response code
+        3 - Check response text
+        4 - Check order id (expected uuid4 string)
         """
         resp = requests.post(
             url=f"{BASE_URL}/orders",
@@ -33,11 +37,11 @@ class TestPostOrders:
     )
     def test_validation_stocks_field(self, field, value, expected):
         """
+        Check stocks field
+        Steps:
+        1 - try to create order with stocks=1/<empty string>/None
+        2 - tru to create order with quantity=1/-10/<empty string>/asd/None
 
-        :param field:
-        :param value:
-        :param expected:
-        :return:
         """
         body={
             "stocks": None,

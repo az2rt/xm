@@ -10,9 +10,12 @@ class TestDeleteOrder:
     def test_positive_case(self, create_order):
         """
         Try to delete order (change status to cancelled).
-        According to requirement, only pending status can be changed.
-        :param create_order:
-        :return:
+        Steps:
+        1 - Creat order
+        2 - Delete order
+        3 - Check response code
+        4 - Check response message
+        4 - Check status has changed to cancelled
         """
         order = create_order
         resp = requests.delete(
@@ -30,7 +33,12 @@ class TestDeleteOrder:
 
     def test_negative_case(self, create_order):
         """
-        Try to change status if order has executed status
+        Try to delete executed order
+        Steps:
+        1 - Creat order
+        2 - Wait 5 sec
+        3 - Check response code
+        4 - Check response message
         """
         order = create_order
         time.sleep(5)
@@ -48,7 +56,10 @@ class TestDeleteOrder:
     def test_delete_non_exist_order(self):
         """
         Try to delete non-exist order
-        :return:
+        Steps:
+        1 - Send request with non-exist order
+        2 - Check response code
+        3 - Check response message
         """
         resp = requests.delete(
             url=f"{BASE_URL}/orders/{random.randint(1, 100000000)}",
@@ -60,7 +71,10 @@ class TestDeleteOrder:
     def test_delete_already_deleted_order(self, create_and_delete_order):
         """
         Try to delete already deleted order
-        :return:
+        Steps:
+        1 - Send request with non-exist order
+        2 - Check response code
+        3 - Check response message
         """
         order = create_and_delete_order
         resp = requests.delete(

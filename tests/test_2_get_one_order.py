@@ -10,8 +10,11 @@ class TestGetOrder:
 
     def test_positive_case(self, create_order):
         """
-        Create order, check after creation
-        :return:
+        Steps:
+        1 - Create order
+        2 - Check response code
+        3 - Check response body type
+        4 - Check status or order
         """
         order = create_order
         resp = requests.get(
@@ -23,8 +26,14 @@ class TestGetOrder:
 
     def test_create_order_wait_5_sec_check_status(self, create_order):
         """
-        According to requirements status should be changed after 5 sec to executed
-        :return:
+        Сheck order status change after some time (in task doesn't say the exact time, I took 5 seconds as an example)
+        Steps:
+        1 - Create order
+        2 - Wait 5 sec
+        3 - Send request to get order
+        4 - Check response code
+        5 - Check response body type
+        6 - Check status or order
         """
         order = create_order
         time.sleep(5)
@@ -45,8 +54,11 @@ class TestGetOrder:
         ])
     def test_negative_case(self, value, response):
         """
-        Try to get non-existent order
-        :return:
+        Check non-exist order with different value (validation)
+        Steps:
+        1 - Send request to get order with value '1234'/uuid4/random int/<space>
+        2 - Check response code
+        3 - Check response message
         """
         resp = requests.get(
             url=f"{BASE_URL}/orders/{value}",
