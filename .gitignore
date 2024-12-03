@@ -1,0 +1,4 @@
+*.pyc
+venv
+tests/allure-results
+tests/results

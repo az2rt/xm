@@ -5,7 +5,7 @@ import time
 import httpx
 import websockets
 
-from .utils.defaults import BASE_URL, WS_URL
+from utils.defaults import BASE_URL, WS_URL
 
 
 async def create_order(client, index):
