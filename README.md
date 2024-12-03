@@ -35,4 +35,5 @@ python tests/performance_check.py -c 100 -b 5
 
 ## Description of project
 `app/` - directory with FastApi application
+
 `tests/` - directory with tests
