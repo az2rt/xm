@@ -1,0 +1,7 @@
+pytest==7.4.4
+fastapi==0.103.2
+uvicorn[standard]==0.22.0
+requests==2.31.0
+allure-pytest==2.13.5
+pytest-asyncio
+httpx

@@ -1,0 +1,47 @@
+version: '3.9'
+
+networks:
+  xm:
+    driver: bridge
+
+services:
+  fastapi-server:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    container_name: fastapi_server
+    networks:
+      - xm
+    ports:
+      - "8080:8080"
+
+  test-runner:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    container_name: test-runner
+    networks:
+      - xm
+    volumes:
+      - "./tests/:/tests"
+      - "../allure-results:/tests/results"
+    environment:
+      - BASE_URL=http://fastapi-server:8080
+      - WS_URL=ws://fastapi-server:8080/ws
+    command: pytest --alluredir=/tests/allure-results
+
+  allure-reports:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - xm
+    ports:
+      - "5001:5001"
+    volumes:
+      - "./tests/allure-results/:/allure-results/"
+    command:
+      - /bin/sh
+      - -c
+      - allure serve /allure-results/ -p 5001
+
